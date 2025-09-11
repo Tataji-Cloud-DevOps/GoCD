@@ -26,7 +26,7 @@
    Developer---->GIT---->CODE SECURITY CHECK FOR QUALITY(SONACUBE)--->Building artifact(Builds)---->Testing(unit testing,Integration testing,functional testing)---->Tag A release--->Nexus
 
 
-### CD (Continuous Delivery / Continuous Deployment):
+##  CD (Continuous Delivery / Continuous Deployment):
 
 ### CD Tools(Argocd/Gocd)
 
@@ -45,4 +45,3 @@
 
  GoCD server (jobs will be created here)--->Node1(Payment team),Node2(cataloge team)Node3:(cart team)
 
- 
