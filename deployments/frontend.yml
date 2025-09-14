@@ -5,7 +5,7 @@ pipelines:
     label_template: "${COUNT}"
     materials:
       mysql-code:
-        git: https://github.com/B58-CloudDevOps/ansible.git
+        git: https://github.com/Tataji-Cloud-DevOps/Ansible.git
         branch: main
         auto_update: true 
         shallow_clone: true
