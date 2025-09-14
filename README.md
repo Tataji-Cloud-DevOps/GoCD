@@ -45,3 +45,6 @@
 
  GoCD server (jobs will be created here)--->Node1(Payment team),Node2(cataloge team)Node3:(cart team)
 
+### GoCD Server requirements: 
+    1) t3.small 
+    2) 30gb disk 

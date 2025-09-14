@@ -1,0 +1,61 @@
+sudo set-hostname GoCd-Server
+curl https://raw.githubusercontent.com/CodingManoj/rhel9-tools/refs/heads/main/GOCD/01-gocd-server-init.sh |sudo bash (by running these command we will get the )
+In application disk space issue go through these commands
+* sudo df -h
+[ ec2-user@GoCd-Server ~ ]$ sudo df -h
+Filesystem                    Size  Used Avail Use% Mounted on
+devtmpfs                      4.0M     0  4.0M   0% /dev
+tmpfs                         955M     0  955M   0% /dev/shm
+tmpfs                         382M  5.4M  377M   2% /run
+/dev/mapper/RootVG-rootVol    6.0G  2.6G  3.4G  44% /
+tmpfs                         955M   55M  901M   6% /tmp
+/dev/nvme0n1p3                424M  321M  104M  76% /boot
+/dev/mapper/RootVG-varVol     2.0G  504M  1.5G  26% /var
+/dev/mapper/RootVG-homeVol    960M  582M  379M  61% /home
+/dev/nvme0n1p2                122M  7.1M  115M   6% /boot/efi
+/dev/mapper/RootVG-varTmpVol  2.0G   47M  1.9G   3% /var/tmp
+/dev/mapper/RootVG-logVol     2.0G   89M  1.9G   5% /var/log
+/dev/mapper/RootVG-auditVol   4.4G   64M  4.3G   2% /var/log/audit
+tmpfs                         191M  4.0K  191M   1% /run/user/1001
+* lsblk
+*  growpart /dev/nvme0n1 4  (it is a command for to increase the disk space)
+* lvextend -r -L +6G /dev/mapper/RootVG-homeVol
+* df -Th
+34.227.46.12 | 172.31.20.80 | t3.small | null
+[ root@GoCd-Server /home/gocd ]# df -Th
+Filesystem                   Type      Size  Used Avail Use% Mounted on
+devtmpfs                     devtmpfs  4.0M     0  4.0M   0% /dev
+tmpfs                        tmpfs     955M     0  955M   0% /dev/shm
+tmpfs                        tmpfs     382M  5.4M  377M   2% /run
+/dev/mapper/RootVG-rootVol   xfs       6.0G  2.6G  3.4G  44% /
+tmpfs                        tmpfs     955M   55M  901M   6% /tmp
+/dev/nvme0n1p3               xfs       424M  321M  104M  76% /boot
+/dev/mapper/RootVG-varVol    xfs       2.0G  504M  1.5G  26% /var
+/dev/mapper/RootVG-homeVol   xfs       7.0G  627M  6.4G   9% /home
+/dev/nvme0n1p2               vfat      122M  7.1M  115M   6% /boot/efi
+/dev/mapper/RootVG-varTmpVol xfs       2.0G   47M  1.9G   3% /var/tmp
+/dev/mapper/RootVG-logVol    xfs       2.0G   89M  1.9G   5% /var/log
+/dev/mapper/RootVG-auditVol  xfs       4.4G   64M  4.3G   2% /var/log/audit
+tmpfs                        tmpfs     191M  4.0K  191M   1% /run/user/1001
+### Creat a WS 
+* In ws install the agent 
+* [ ec2-user@WS ~ ]$ curl https://raw.githubusercontent.com/CodingManoj/      rhel9-tools/refs/heads/main/GOCD/02-gocd-agent-init.sh |sudo bash
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  1834  100  1834    0     0   9124      0 --:--:-- --:--:-- --:--:--  9124
+ - Installing Java - Success
+ - Adding GoCD user - Success
+ - Download GoCD zip File - Success
+ - Unzipping GoCD zip file - Success
+ - Setup systemd GoCD Agent Service file - Success
+ - Enable GoCD Agent Service - Success
+ - Start GoCD Agent Service - Success
+
+
+ -> Open this file /home/gocd/go-agent-23.5.0/wrapper-config/wrapper-properties.conf & Update wrapper.app.parameter.101 line and replace localhost with gocd server ip address and restart gocd-agent service
+To restart service systemctl restart gocd-agent
+
+### Shallow clone
+* git clone --depth=1 https://tataji.github.com (it takes lates commit)
+
+
